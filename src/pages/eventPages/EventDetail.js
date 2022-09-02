@@ -6,6 +6,9 @@ import Cookies from "universal-cookie";
 import moment from "moment";
 import { v4 as uuidv4 } from "uuid";
 import Swal from 'sweetalert2'
+
+
+
 function EventDetail() {
   const { id } = useParams();
   const [data, setData] = useState([]);
