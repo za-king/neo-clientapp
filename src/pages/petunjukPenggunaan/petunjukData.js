@@ -13,40 +13,40 @@ export const petunjukData = [
   {
     id: 1,
     data1: "1. Masuk Kehalaman Login",
-    gambar1 :login,
+    gambar1: login,
     data2:
       "2. Jika belum mempunyai Akun dapat melakukan Register pada Halaman Register",
-      gambar2 :regis,
+    gambar2: regis,
     data3:
       "3. Masuk kehalaman Event dan Pilih satu event yang akan didaftarkan",
-      gambar3 :event1,
-      gambar4 :event2,
+    gambar3: event1,
+    gambar4: event2,
     data4:
       "4. Setelah berhasil melakukan daftar Event Selanjutnya adalah upload bukti pembayaran",
-      gambar5 :profile,
+    gambar5: profile,
     data5: "5. Masukkan Foto Bukti Pembayaran dan informasi lainnya",
-    gambar6 :uploadE1,
+    gambar6: uploadE1,
     data6:
       "6. Setelah Berhasil Upload Bukti Pembayaran selanjutnya admin akan konfirmasi pembayaran yang berhasil di input",
-      gambar7 :kon1,
+    gambar7: kon1,
   },
   {
     id: 2,
     data1: "1. Masuk Kehalaman Login",
-    gambar1 :login,
+    gambar1: login,
     data2:
       "2. Jika belum mempunyai Akun dapat melakukan Register pada Halaman Register",
-      gambar2 :regis,
+    gambar2: regis,
     data3: "3. Masuk kehalaman Konsultasi dan Masukakan data yang dibutuhkan",
-    gambar3 :konsul1,
-    gambar4 :konsul2,
+    gambar3: konsul1,
+    gambar4: konsul2,
     data4:
       "4. Setelah berhasil melakukan daftar Konsultasi Selanjutnya adalah upload bukti pembayaran",
-      gambar5 :profile,
+    gambar5: profile,
     data5: "5. Masukkan Foto Bukti Pembayaran dan informasi lainnya",
-    gambar6 :uploadK1,
+    gambar6: uploadK1,
     data6:
       "6. Setelah Berhasil Upload Bukti Pembayaran selanjutnya admin akan konfirmasi pembayaran yang berhasil di input",
-      gambar7 :kon2,
+    gambar7: kon2,
   },
 ];
