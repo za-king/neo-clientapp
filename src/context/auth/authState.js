@@ -3,6 +3,7 @@ import { useReducer } from "react";
 import authReducer from "./authReducer";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
+import Swal from 'sweetalert2'
 import * as api from "../../api";
 import { GET_DATA, LOAD_USER, LOGGIN, LOGGOUT, REGISTER } from "../types";
 
@@ -48,13 +49,37 @@ const AuthState = ({ children }) => {
   const Login = async (username, password) => {
     const data = { username: username, password: password };
     const res = await api.loginApi(data);
-    try {
-      dispatch({ type: LOGGIN, payload: res });
-      LoadUser()
-      navigate("/profile");
-    } catch (error) {
-      console.log(error);
+    console.log(res.data)
+    if(res.data.error === "User Does'nt Exist" ){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: res.data.error,
+      })
+      navigate("/login");
+    }else if(res.data.error === "wrong pass  and username"){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: res.data.error,
+      })
+      navigate("/login");
+    }else{
+      Swal.fire({
+        icon: 'success',
+        title: 'Berhasil Login',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      try {
+        dispatch({ type: LOGGIN, payload: res });
+        LoadUser()
+        navigate("/event");
+      } catch (error) {
+        console.log(error);
+      }
     }
+    
   };
   const Logout = async () => {
     

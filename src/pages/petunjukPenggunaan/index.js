@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { petunjukData } from "./petunjukData";
 
 const PetunjukPenggunaan = () => {
-  
   const buttonStyle =
     "[#FF1800]  hover:bg-[#FF1800]     shadow-2xl hover:rounded-full w-[100px] h-[36px] border-solid border-2 border-[#FF1800] rounded-md ";
   const buttonStyleActive =
@@ -33,7 +32,37 @@ const PetunjukPenggunaan = () => {
         </button>
       </div>
 
-      {petunjukData[click].id}
+      <div className="justify-center flex flex-col items-center text-2xl text start">
+        <div className="my-8">
+          
+          <p className="w-[700px]">{petunjukData[click].data1}</p>
+          <img src={petunjukData[click].gambar1} alt="as" width={700} />
+        </div>
+
+        <div className="my-8">
+          <p className="w-[700px]">{petunjukData[click].data2}</p>
+          <img src={petunjukData[click].gambar2} alt="as" width={700} />
+        </div>
+
+        <div className="my-8">
+          <p className="w-[700px]">{petunjukData[click].data3}</p>
+          <img src={petunjukData[click].gambar3} alt="as" width={700} />
+          <img src={petunjukData[click].gambar4} alt="as" width={700} />
+        </div>
+
+        <div className="my-8">
+          <p className="w-[700px]">{petunjukData[click].data4}</p>
+          <img src={petunjukData[click].gambar5} alt="as" width={700} />
+        </div>
+        <div className="my-8">
+          <p className="w-[700px]">{petunjukData[click].data5}</p>
+          <img src={petunjukData[click].gambar6} alt="as" width={700} />
+        </div>
+        <div className="my-8">
+          <p className="w-[700px]">{petunjukData[click].data6}</p>
+          <img src={petunjukData[click].gambar7} alt="as" width={700} />
+        </div>
+      </div>
     </div>
   );
 };

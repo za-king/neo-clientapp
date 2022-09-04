@@ -1,5 +1,5 @@
 import Cookies from "universal-cookie";
-
+import Swal from 'sweetalert2'
 import { GET_DATA, LOAD_USER, LOGGIN, LOGGOUT, REGISTER } from "../types";
 const authReducer = (state, action) => {
   const cookies = new Cookies();
@@ -9,10 +9,18 @@ const authReducer = (state, action) => {
       return console.log(action.payload);
 
     case REGISTER:
-      return console.log(action.payload);
+      return (Swal.fire({
+        icon: 'success',
+        title: 'Berhasil membuat Akun',
+        showConfirmButton: false,
+        timer: 1500
+      }))
     case LOGGIN:
-      cookies.set("token2", action.payload.data.accesToken, { path: "/" });
-      localStorage.setItem("id", action.payload.data.id);
+      
+        cookies.set("token2", action.payload.data.accesToken, { path: "/" });
+        localStorage.setItem("id", action.payload.data.id);
+      
+      
       return {
         ...state,
         loading: false,

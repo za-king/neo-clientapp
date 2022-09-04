@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import moment from "moment";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/auth/authContext";
 function Profile() {
   const authcontext = useContext(AuthContext);
@@ -12,8 +12,10 @@ function Profile() {
 
   const [data, setData] = useState([]);
   const [data2, setData2] = useState([]);
+  const [data3, setData3] = useState([]);
+  const [data4, setData4] = useState([]);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   useEffect(() => {
     setLoading(true);
     axios.get(`${process.env.REACT_APP_BASE_URL}/orders`).then((res) => {
@@ -23,17 +25,23 @@ function Profile() {
     axios.get(`${process.env.REACT_APP_BASE_URL}/konsuls`).then((res) => {
       setData2(res.data);
     });
+
+    axios.get(`${process.env.REACT_APP_BASE_URL}/buktievent`).then((res) => {
+      setData3(res.data);
+    });
+
+    axios.get(`${process.env.REACT_APP_BASE_URL}/buktikonsul`).then((res) => {
+      setData4(res.data);
+    });
     setLoading(false);
   }, []);
+
   const handleLogout = () => {
     Logout();
     LoadUser();
   };
 
-  
-
- 
- console.log(data)
+  console.log(data2);
   return (
     <div className="min-h-screen max-h-full py-24">
       <div className=" m-12 grid lg:grid-cols-4 sm:grid-cols-1 ">
@@ -88,22 +96,28 @@ function Profile() {
                           </div> */}
 
                           <div className="flex justify-between">
-                            
-                           
-                         
-                            <div
-                             onClick={()=>{
-                              navigate(`/uploadevent/${value.id}`)
-                             }}
+                            {data3.filter(
+                              (bukti1) => bukti1.kode_order == value.uuid
+                            ).length > 0 ? (
+                              <div
+                              
                             >
-                               
-                               <p className="font-bold text-lg text-gray-400 ">
+                              <p className="font-bold text-lg text-green-400 ">
+                                 Sudah Upload Bukti Pembayaran
+                              </p>
+                            </div>
+                            ) : (
+                              <div
+                              onClick={() => {
+                                navigate(`/uploadevent/${value.id}`);
+                              }}
+                            >
+                              <p className="font-bold text-lg text-gray-400 ">
                                 Upload Bukti Pembayaran
                               </p>
-             
-                              
-                              
                             </div>
+                            )}
+                            
                             <p
                               className={
                                 value.isComplete
@@ -111,7 +125,9 @@ function Profile() {
                                   : "bg-red-300 rounded w-max mb-4 px-4 font-bold text-md text-gray-400"
                               }
                             >
-                              {value.isComplete ? "sudah melakukan pembayar" : "menunggu konfirmas admin"}
+                              {value.isComplete
+                                ? "sudah melakukan pembayar"
+                                : "menunggu konfirmas admin"}
                             </p>
                           </div>
                         </div>
@@ -124,20 +140,22 @@ function Profile() {
                 {data2.map((value) => {
                   if (parseInt(userId) === value.UserId) {
                     return (
-                      <div className=" h-full border py-8 shadow  flex flex-col">
+                      <div className=" h-full border py-8 shadow  flex flex-col cursor-pointer">
                         <div className="ml-8">
                           <p className="text-lg font-bold my-2">{value.nama}</p>
                           <p className="text-slate-700 my-2">{value.email}</p>
                           <p className="my-2">{value.nomor_wa}</p>
                           <div className="flex justify-between">
-                          <p
+                            <p
                               className={
                                 value.isComplete
                                   ? "bg-green-300 rounded w-max mb-4 px-4 font-bold text-lg text-gray-400"
                                   : "bg-red-300 rounded w-max mb-4 px-4 font-bold text-lg text-gray-400"
                               }
                             >
-                              {value.isComplete ? "sudah bayar" : "menunggu konfirmas admin"}
+                              {value.isComplete
+                                ? "sudah melakukan pembayar"
+                                : "menunggu konfirmas admin"}
                             </p>
                             <div
                               onClick={() => {
@@ -145,18 +163,14 @@ function Profile() {
                               }}
                             >
                               <div
-                             onClick={()=>{
-                              navigate(`/uploadKonsul/${value.id}`)
-                             }}
-                            >
-                               
-                               <p className="font-bold text-lg text-gray-400 ">
-                                Upload Bukti Pembayaran
-                              </p>
-             
-                              
-                              
-                            </div>
+                                onClick={() => {
+                                  navigate(`/uploadKonsul/${value.id}`);
+                                }}
+                              >
+                                <p className="font-bold text-lg text-gray-400 ">
+                                  Upload Bukti Pembayaran
+                                </p>
+                              </div>
                             </div>
                           </div>
                         </div>

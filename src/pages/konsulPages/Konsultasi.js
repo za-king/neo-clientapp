@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { v4 as uuidv4 } from "uuid";
@@ -21,6 +21,13 @@ function Konsultasi() {
     title: 'Oops...',
     text: 'anda belum login!',
     
+  })
+  const alertSucces =() =>Swal.fire({
+    
+    icon: 'success',
+    title: 'Berhasil Daftar Event',
+    showConfirmButton: false,
+    timer: 1500
   })
   const data = {
     nama: nama,
@@ -66,6 +73,7 @@ function Konsultasi() {
     if (cookies.get("token2") === undefined) {
       alert();
     } else {
+      alertSucces()
       axios
         .post(`${process.env.REACT_APP_BASE_URL}/konsuls`, data, {
           headers: {

@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext  } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+
 import axios from "axios";
 import Cookies from "universal-cookie";
 import moment from "moment";
 import { v4 as uuidv4 } from "uuid";
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 
 
@@ -13,6 +14,8 @@ function EventDetail() {
   const { id } = useParams();
   const [data, setData] = useState([]);
   const UserId = localStorage.getItem("id");
+  
+
   const cookies = new Cookies();
   const uuid = uuidv4();
   const navigate = useNavigate();
@@ -22,6 +25,14 @@ function EventDetail() {
     title: 'Oops...',
     text: 'anda belum login!',
     
+  })
+
+  const alertSucces =() =>Swal.fire({
+    
+    icon: 'success',
+    title: 'Berhasil Daftar Event',
+    showConfirmButton: false,
+    timer: 1500
   })
 
   useEffect(() => {
@@ -36,6 +47,8 @@ function EventDetail() {
     if(cookies.get("token2") === undefined){
       alert()
     }else{
+
+      alertSucces()
       axios
       .post(
         `${process.env.REACT_APP_BASE_URL}/orders`,
@@ -53,8 +66,9 @@ function EventDetail() {
       )
       .then((res) => {
         console.log(res.data);
+        navigate("/profile")
       })
-      .then(navigate("/profile"));
+      
     }
   
   };

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-
+import Swal from 'sweetalert2';
 const UploadKonsul = () => {
   const { id } = useParams();
   const [data, setData] = useState([]);
@@ -12,12 +12,22 @@ const UploadKonsul = () => {
   const [no_rekening_pengirim, setNo_rekening_pengirim] = useState("");
   const [nama_rekening_penerima, setNama_rekening_penerima] = useState("");
   const [no_rekening_penerima, setNo_rekening_penerima] = useState("");
-
+  const navigate =useNavigate()
   useEffect(() => {
-    axios.get(`http://localhost:3004/konsuls/byId/${id}`).then((res) => {
+    axios.get(`${process.env.REACT_APP_BASE_URL}/konsuls/byId/${id}`).then((res) => {
       setData(res.data);
     });
   }, [id]);
+
+  const alertSucces =() =>Swal.fire({
+    
+    icon: 'success',
+    title: 'Berhasil Daftar Upload Bukti Pembayaran',
+    showConfirmButton: false,
+    timer: 1500
+  },
+  
+  )
 
   const getFileInfo = (e) => {
     //NOTE THE ADDITION OF 'e' PARAMETER
@@ -61,13 +71,16 @@ const UploadKonsul = () => {
     formdata.append("no_rekening_penerima", no_rekening_penerima);
 
     axios
-      .post("http://localhost:3004/buktikonsul", formdata)
+      .post(`${process.env.REACT_APP_BASE_URL}/buktikonsul`, formdata)
       .then((res) => {
         console.log(res.data);
+        
       })
       .catch((err) => {
         console.log(err);
       });
+      alertSucces()
+      navigate('/profile')
   };
   console.log(id)
   return (
@@ -76,7 +89,7 @@ const UploadKonsul = () => {
         <div></div>
 
         <div>
-          <h1 className=" text-center my-12">Upload Bukti Pembayaran</h1>
+          <h1 className=" text-center my-12">Upload Bukti Pembayaran Konsultasi</h1>
           <form action="">
             <div className="col-span-6 sm:col-span-4">
               <label
