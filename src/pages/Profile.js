@@ -34,7 +34,7 @@ function Profile() {
       setData4(res.data);
     });
     setLoading(false);
-  }, []);
+  }, [data, data2, data3, data4, loading]);
 
   const handleLogout = () => {
     Logout();
@@ -99,25 +99,23 @@ function Profile() {
                             {data3.filter(
                               (bukti1) => bukti1.kode_order == value.uuid
                             ).length > 0 ? (
-                              <div
-                              
-                            >
-                              <p className="font-bold text-lg text-green-400 ">
-                                 Sudah Upload Bukti Pembayaran
-                              </p>
-                            </div>
+                              <div>
+                                <p className="font-bold text-lg text-green-400 ">
+                                  Sudah Upload Bukti Pembayaran
+                                </p>
+                              </div>
                             ) : (
                               <div
-                              onClick={() => {
-                                navigate(`/uploadevent/${value.id}`);
-                              }}
-                            >
-                              <p className="font-bold text-lg text-gray-400 ">
-                                Upload Bukti Pembayaran
-                              </p>
-                            </div>
+                                onClick={() => {
+                                  navigate(`/uploadevent/${value.id}`);
+                                }}
+                              >
+                                <p className="font-bold text-lg text-gray-400 ">
+                                  Upload Bukti Pembayaran
+                                </p>
+                              </div>
                             )}
-                            
+
                             <p
                               className={
                                 value.isComplete
@@ -162,15 +160,25 @@ function Profile() {
                                 alert(value.Event.price);
                               }}
                             >
+                               {data4.filter(
+                              (bukti1) => bukti1.kode_order == value.uuid
+                            ).length > 0 ? (
+                              <div>
+                                <p className="font-bold text-lg text-green-400 ">
+                                  Sudah Upload Bukti Pembayaran
+                                </p>
+                              </div>
+                            ) : (
                               <div
                                 onClick={() => {
-                                  navigate(`/uploadKonsul/${value.id}`);
+                                  navigate(`/uploadkonsul/${value.id}`);
                                 }}
                               >
                                 <p className="font-bold text-lg text-gray-400 ">
                                   Upload Bukti Pembayaran
                                 </p>
                               </div>
+                            )}
                             </div>
                           </div>
                         </div>

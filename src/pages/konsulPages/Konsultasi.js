@@ -3,7 +3,7 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import { v4 as uuidv4 } from "uuid";
 import Swal from 'sweetalert2';
-
+import { useNavigate } from "react-router-dom";
 
 function Konsultasi() {
   const [nama, setNama] = useState("");
@@ -15,6 +15,8 @@ function Konsultasi() {
   const UserId = localStorage.getItem("id");
   const cookies = new Cookies();
   const uuid = uuidv4();
+  const navigate = useNavigate();
+
 
   const alert = () => Swal.fire({
     icon: 'error',
@@ -25,10 +27,12 @@ function Konsultasi() {
   const alertSucces =() =>Swal.fire({
     
     icon: 'success',
-    title: 'Berhasil Daftar Event',
+    title: 'Berhasil Daftar Konsultasi',
     showConfirmButton: false,
     timer: 1500
-  })
+  }
+  ,navigate('/profile')
+  )
   const data = {
     nama: nama,
     nomor_wa: nomor_wa,
@@ -83,6 +87,8 @@ function Konsultasi() {
         .then((res) => {
           console.log(res.data);
         });
+
+      alertSucces()
     }
   };
   console.log(data);
